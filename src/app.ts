@@ -10,15 +10,15 @@ const app = express()
 // Express configuration
 app.set('port', process.env.PORT || 8080)
 app.use(bodyParser.json())
-app.use(pinoHttpLogger)
-// app.use(apiKeyAuthentication)
+if (process.env.NODE_ENV != 'test') {
+  app.use(pinoHttpLogger)
+}
 
 // Express routes
-app.use('/', homeController.index)
+const homeRouter = express.Router()
+homeRouter.use('/', homeController.index)
 
-// const v3Router = express.Router()
-// v3Router.post('/concatenate', wrapAsync(v3.concatenate))
-// v3Router.post('/gatherFiles', wrapAsync(v3.gatherFiles))
-// app.use('/v3', v3Router)
+// app.use(apiKeyAuthentication)
+app.use('/', homeRouter)
 
 export default app
