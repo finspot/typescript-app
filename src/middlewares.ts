@@ -11,7 +11,8 @@ export async function apiKeyAuthentication(req: Request, res: Response, next: Ne
 }
 
 export function defaultErrorHandler(error: any, _req: Request, res: Response, _next: NextFunction) {
-  res.status(500).send({ error })
+  res.err = error
+  res.status(500).send()
 }
 
 // See https://thecodebarbarian.com/80-20-guide-to-express-error-handling
