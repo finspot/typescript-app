@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@bugsnag/js": "^7.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
@@ -7,6 +8,7 @@
     "pino-http": "^5.2.0"
   },
   "devDependencies": {
+    "@types/bugsnag": "^3.1.0",
     "@types/chai": "^4.2.11",
     "@types/dotenv": "^8.2.0",
     "@types/expect": "^24.3.0",

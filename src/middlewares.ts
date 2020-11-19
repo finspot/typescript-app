@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express'
+import { Bugsnag } from './util/bugsnag'
 
 const apiKey = process.env.API_KEY
 
@@ -11,6 +12,9 @@ export async function apiKeyAuthentication(req: Request, res: Response, next: Ne
 }
 
 export function defaultErrorHandler(error: any, _req: Request, res: Response, _next: NextFunction) {
+  if (process.env.NODE_ENV == 'production') {
+    Bugsnag.notify(error)
+  }
   res.err = error
   res.status(500).send()
 }
