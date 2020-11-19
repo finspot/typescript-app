@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import { pinoHttpLogger } from './util/logger'
-// import { wrapAsync } from './middlewares'
+import { wrapAsync } from './middlewares'
 import * as homeController from './controllers/homeController'
 
 // Express server
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV != 'test') {
 
 // Express routes
 const homeRouter = express.Router()
-homeRouter.use('/', homeController.index)
+homeRouter.use('/', wrapAsync(homeController.index))
 
 // app.use(apiKeyAuthentication)
 app.use('/', homeRouter)
