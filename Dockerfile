@@ -26,16 +26,11 @@ WORKDIR /usr/src/app
 # Install OS deps
 RUN \
   apt-get update && \
-  apt-get install -qq -y --fix-missing --no-install-recommends \
-      pdftk \
-      poppler-utils \
-      ghostscript
+  apt-get install -qq -y --fix-missing --no-install-recommends
 
 COPY --from=tsc-builder /usr/src/app/dist ./dist
 COPY --from=tsc-builder /usr/src/app/package.json ./
 COPY --from=tsc-builder /usr/src/app/package-lock.json ./
-
-COPY covers ./covers
 
 RUN npm ci --production
 
